@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+     <title>Acheropnte River</title>
+     <link rel="stylesheet" href="styles/reset.css">
+     <link rel="stylesheet" href="styles/style.css" />
+     <style>
+        
+     </style>
+  </head>
+
+  <body>
+    <div id="game-board">
+         <canvas id="canvas" width="700px" height="400px"></canvas>
+    </div>        
+    <br/>
+    <div>
+         <button id="button-one">Satus Ludum</button>
+   </div>
+   <div>
+         <button id="button-two">Iterum Incipi</button>
+   </div>  
+   <p id="instructions">Press 'Satus Ludum' to start the game, press 'Iterum Incipi' to restart the game<br>use 'arrow up' and 'arrow down' on your keyboard to move</p>
+   <div class="side-images">
+    <img src="img/dante2.jpg" id="dante" alt="dante">
+   </div>
+   <div class="side-images">
+    <img src="img/caronte.jpg" id="caronte" alt="caronte">
+   </div>
+    <!-- include js file after DOM is loaded; 
+            if included earlier, you have to use window.onload = function(){ ... } 
+            approach in your intro.js file -->
+    <script src="js/index.js"></script>
+    <footer>
+      <p>Game realized by Davide Lopresti <br> <span id="underline">MEMENTO MORI</span> </p>
+    </footer>
+  </body>
+</html>

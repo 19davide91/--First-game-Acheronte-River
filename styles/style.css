@@ -1,0 +1,120 @@
+
+
+@media (min-width: 1098px){
+    
+
+    
+canvas {
+    border: 1px solid red;
+    padding: 0; 
+    margin: auto; 
+    display: block; 
+    position: absolute; 
+    top: 150px; 
+    bottom: 0; 
+    left: 0; 
+    right: 0;
+    border-radius: 30px;
+}
+
+body {
+    text-align: center;
+    background-image:url('../img/inf1.jpg');
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+   }
+
+#button-one {
+    background-color: darkred;
+    color: red;
+    border: none;
+    padding: 20px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 35px;
+    border-radius: 20px;
+    transition-duration: 0.0s;
+    font-style: oblique;
+    font-stretch: ultra-expanded;
+    font-weight: 600;
+    -webkit-text-stroke: 2px black;
+    margin-top: 0px;
+  }   
+
+  #button-one:hover {
+    background-color: darkgreen;
+    color: rgb(7, 207, 7);
+  }
+
+  #button-two {
+    background-color: darkred;
+    border: none;
+    color: red;
+    padding: 20px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 35px;
+    border-radius: 20px;
+    transition-duration: 0.0s;
+    font-style: oblique;
+    font-stretch: ultra-expanded;
+    font-weight: 600;
+    -webkit-text-stroke: 2px black;
+    margin-top: 10px;
+  }   
+
+  #button-two:hover {
+    background-color: darkblue;
+    color: rgb(15, 149, 246);
+  }
+
+  button:active{
+    box-shadow: 0 0 5px 5px darkred;
+    transform: translateY(3px);
+  }
+
+  #instructions {
+    margin-top: 10px;
+    font-size: 25px;
+    color: black; 
+    font-style: italic;
+  }
+
+  #dante {
+    width: 150px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -20%); 
+    border: 5px solid darkred;
+    border-radius: 200px;
+  }
+
+  #caronte {
+    width: 150px;
+    height: 250px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -20%); 
+    border: 5px solid darkred;
+    border-radius: 200px;
+  }
+
+  footer {
+    font-size: 20px;
+    position: fixed;     
+    text-align: center;    
+    bottom: 0px; 
+    width: 100%;
+    color: red;
+  }
+  #underline{
+    text-decoration: underline;
+  }
+}
