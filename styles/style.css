@@ -16,20 +16,20 @@ canvas {
 body {
     text-align: center;
     background-image:url('../img/inf1.jpg');
-  background-position:center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
    }
 
 #button-one {
     background-color: darkred;
     color: red;
     border: none;
-    padding: 20px 50px;
-    text-align: center;
+    padding: 10px 40px;
+    /* text-align: center; */
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 35px;
     border-radius: 20px;
     transition-duration: 0.0s;
@@ -49,10 +49,10 @@ body {
     background-color: darkred;
     border: none;
     color: red;
-    padding: 20px 50px;
-    text-align: center;
+    padding: 10px 40px;
+    /* text-align: center; */
     text-decoration: none;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 35px;
     border-radius: 20px;
     transition-duration: 0.0s;
