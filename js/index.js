@@ -10,9 +10,6 @@ function backgroundCanvas(){
 function sound(src){
     this.sound = document.createElement('audio');
     this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
     document.body.appendChild(this.sound);
     this.play = function(){
       this.sound.play();
@@ -21,12 +18,27 @@ function sound(src){
       this.sound.pause();
   }
 }
-let music = new sound('stranger-things-124008.mp3');
+let music = new sound('/music/Glory-Eternal.mp3');
+
+function sound2(src){
+  this.sound2 = document.createElement('audio');
+  this.sound2.src = src;
+  document.body.appendChild(this.sound2);
+  this.play = function(){
+    this.sound2.play();
+  }
+  this.stop = function(){
+    this.sound2.pause();
+}
+}
+let music2 = new sound('/music/WhatsApp Ptt 2022-12-07 at 10.58.16.mp3');
 
 class Boat {
     constructor(){
         this.x = 10;
         this.y = 160;
+        this.width = 55;
+        this.height = 55;
         this.speedX = 0;
         this.speedY = 0;
 
@@ -37,19 +49,19 @@ class Boat {
         }) 
     }
     draw(){
-        ctx.drawImage(this.img, this.x, this.y, 60, 60);
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     moveUp() {
-        this.y -= 20;
+        this.y -= 25;
     }
     moveDown() {
-        this.y += 20;
+        this.y += 25;
     }
     moveLeft(){
-        this.x -= 20
+        this.x -= 25
     }
     moveRight(){
-        this.x += 20
+        this.x += 25
     }
     left() {
         return this.x;
@@ -71,6 +83,8 @@ class Demon{
     constructor(x,y){
         this.x = x;
         this.y = y;
+        this.width = 80;
+        this.height = 80;
         const demonImg = new Image();
         demonImg.src = './img/demon.jpg';
         demonImg.addEventListener('load',()=>{
@@ -78,7 +92,7 @@ class Demon{
         }) 
     }
     draw() {
-        ctx.drawImage(this.img, this.x, this.y, 80, 80);
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     move(){
         this.x -= 10;
@@ -101,6 +115,8 @@ class Soul{
     constructor(x,y){
         this.x = x;
         this.y = y;
+        this.width = 50;
+        this.height = 50;
         const soulImg = new Image();
         soulImg.src = './img/soul.jpg';
         soulImg.addEventListener('load',()=>{
@@ -108,7 +124,7 @@ class Soul{
         }) 
     }
     draw() {
-        ctx.drawImage(this.img, this.x, this.y, 50, 50);
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     move(){
         this.x -= 10;
@@ -148,9 +164,12 @@ let arrayDemons = [];
 let frames = 0;
 
 function updateDemons() {
-    for (i = 0; i < arrayDemons.length; i++) {
+    let i = 0;
+    //for (i = 0; i < arrayDemons.length; i++) {
+    while(arrayDemons.length !== 0 && i < arrayDemons.length){
       arrayDemons[i].x -= 1;
       arrayDemons[i].draw();
+      i++;
     }
     frames += 0.5;
     if (frames % 120 === 0) {
@@ -166,9 +185,12 @@ let arraySouls = [];
 let frames2 = 5;
 
  function updateSouls() {
-    for (i = 0; i < arraySouls.length; i++) {
+  let i = 0;
+    // for (i = 0; i < arraySouls.length; i++) {
+      while(arraySouls.length !== 0 && i < arraySouls.length){
       arraySouls[i].x -= 0.5;
       arraySouls[i].draw();
+      i++;
     }
     frames2 += 0.5;
     if (frames % 120 === 0) {
@@ -186,7 +208,8 @@ let frames2 = 5;
     boat1.draw();
     updateDemons();
     updateSouls();
-    checkCollision();
+    checkCollisionDemons();
+    checkCollisionSouls();
   }
 
  function gameStart(){
@@ -199,34 +222,80 @@ let frames2 = 5;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     backgroundCanvas();
     clearInterval(animation);
+    arraySouls = [];
+    arrayDemons = [];
+    music.stop();
   }
+
+  document.addEventListener('keydown',(event)=>{
+    if(event.keyCode === 32){
+      clearCanvas();
+    }
+  })
 
 function crashDemon(demon) {
-    // return !(
-    //   boat1.bottom() >= demon.top() ||
-    //   boat1.top() <= demon.bottom() ||
-    //   boat1.right() >= demon.left()||
-    //   boat1.left() <= demon.right()
-    // );
-    if(boat1.bottom() >= demon.top() &&
-    boat1.top() <= demon.bottom() &&
-    boat1.right() >= demon.left() &&
-    boat1.left() <= demon.right());
-    return true;
+  //console.log('condition four',(boat1.bottom() > demon.top()))
+ // console.log('condition three',(boat1.left() < demon.right()))
+  //console.log('condition two',(boat1.right() > demon.left()))
+ //  console.log('condition one',(boat1.top() < demon.bottom()))
+ //console.log('boat position: ', boat1.top(), boat1.left(), boat1.right(), boat1.bottom())
+ // console.log('demon position: ', demon.top(), demon.left(), demon.right(), demon.bottom())
+ return !(
+      boat1.top() > demon.bottom() ||
+      boat1.right() < demon.left() ||
+      boat1.left() > demon.right() ||
+      boat1.bottom() < demon.top() 
+    );
+  
+    // if(boat1.bottom() >= demon.top() &&
+    // boat1.top() <= demon.bottom() &&
+    // boat1.right() >= demon.left() &&
+    // boat1.left() <= demon.right());
+    // return true;
   }
 
-function checkCollision() {
-    const collision = arrayDemons.some(function (demon) {
+function checkCollisionDemons() {
+    const collisionDemon = arrayDemons.some(function (demon) {
         return crashDemon(demon);
     });
-    console.log(collision)
-    if(collision) {
+    console.log('collisionDaemon: ',collisionDemon)
+    if(collisionDemon) {
       clearCanvas();
       ctx.font = "55px Comic Sans MS";
       ctx.fillStyle = "red";
       ctx.textAlign = "center";
       ctx.fillText(`OH NO YOU'RE DAMNED!`, canvas.width/2, canvas.height/2);
     }
+  }
+
+  function crashSoul(soul) {
+    return !(
+      boat1.top() > soul.bottom() ||
+      boat1.right() < soul.left()||
+      boat1.left() > soul.right() ||
+      boat1.bottom() < soul.top() 
+    );
+  }
+
+  function checkCollisionSouls(){
+    for(let i = 0; i < arraySouls.length; i++){
+      //check for a collision
+      if(crashSoul(arraySouls[i])){
+        console.log('i touched a soul :)')
+        arraySouls.splice(i, 1);
+      }
+    }
+    // const collisionSouls = arraySouls.some(function (soul) {
+     //  return crashSoul(soul);
+  // });
+    //if(collisionSouls){
+      //console.log('i touched a soul :)')
+      // Find the soul inside arraySouls and remove it from the array
+      //const nonTouchedSouls =arraySouls.filter(soul => crashSoul(soul))
+      //console.log('nonTouchedSouls', nonTouchedSouls.length)
+      // increase the score of the userr
+      // arraySouls[i]
+    //}
   }
 
 window.onload = () => {
