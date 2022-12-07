@@ -7,6 +7,22 @@ function backgroundCanvas(){
     ctx.drawImage(backGroundImg, 0, 0, canvas.width , canvas.height);
 }
 
+function sound(src){
+    this.sound = document.createElement('audio');
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+  }
+}
+let music = new sound('stranger-things-124008.mp3');
+
 class Boat {
     constructor(){
         this.x = 10;
@@ -28,6 +44,12 @@ class Boat {
     }
     moveDown() {
         this.y += 20;
+    }
+    moveLeft(){
+        this.x -= 20
+    }
+    moveRight(){
+        this.x += 20
     }
     left() {
         return this.x;
@@ -105,8 +127,6 @@ class Soul{
     }
 }
 
-let soul1 = new Soul(canvas.width, 50);
-
 document.addEventListener('keydown', event => {
     switch (event.keyCode) {
       case 38:
@@ -115,6 +135,12 @@ document.addEventListener('keydown', event => {
       case 40:
         boat1.moveDown();
         break;
+      case 37:
+        boat1.moveLeft();
+        break;
+      case 39:
+        boat1.moveRight();
+        break;    
     }
   });
 
@@ -131,7 +157,7 @@ function updateDemons() {
       let minY = 0;
       let maxY = 310;
       let y = Math.floor(Math.random() * (maxY- minY + 1) + minY);
-      let x = canvas.width-100;
+      let x = canvas.width;
       arrayDemons.push(new Demon(x,y));
     }
   }
@@ -141,7 +167,7 @@ let frames2 = 5;
 
  function updateSouls() {
     for (i = 0; i < arraySouls.length; i++) {
-      arraySouls[i].x -= 1;
+      arraySouls[i].x -= 0.5;
       arraySouls[i].draw();
     }
     frames2 += 0.5;
@@ -149,7 +175,7 @@ let frames2 = 5;
       let minY = 0;
       let maxY = 310;
       let y = Math.floor(Math.random() * (maxY- minY + 1) + minY);
-      let x = canvas.width-100;
+      let x = canvas.width;
       arraySouls.push(new Soul(x,y));
     }
   }
@@ -160,28 +186,56 @@ let frames2 = 5;
     boat1.draw();
     updateDemons();
     updateSouls();
+    checkCollision();
   }
 
  function gameStart(){
     backgroundCanvas();
     boat1.draw();
-    updateDemons();
-    updateSouls();
+    music.play();
   }
 
  function clearCanvas(){
-    clearInterval(animation);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     backgroundCanvas();
+    clearInterval(animation);
+  }
+
+function crashDemon(demon) {
+    // return !(
+    //   boat1.bottom() >= demon.top() ||
+    //   boat1.top() <= demon.bottom() ||
+    //   boat1.right() >= demon.left()||
+    //   boat1.left() <= demon.right()
+    // );
+    if(boat1.bottom() >= demon.top() &&
+    boat1.top() <= demon.bottom() &&
+    boat1.right() >= demon.left() &&
+    boat1.left() <= demon.right());
+    return true;
+  }
+
+function checkCollision() {
+    const collision = arrayDemons.some(function (demon) {
+        return crashDemon(demon);
+    });
+    console.log(collision)
+    if(collision) {
+      clearCanvas();
+      ctx.font = "55px Comic Sans MS";
+      ctx.fillStyle = "red";
+      ctx.textAlign = "center";
+      ctx.fillText(`OH NO YOU'RE DAMNED!`, canvas.width/2, canvas.height/2);
+    }
   }
 
 window.onload = () => {
     backgroundCanvas();
     document.getElementById('button-one').onclick = () => {
       gameStart(); 
-      animation = setInterval(updateCanvas, 5);
+      animation = setInterval(updateCanvas, 8);
     };
     document.getElementById('button-two').onclick = () => {
-         clearCanvas();
-        };
+      clearCanvas();
+    };
 };
