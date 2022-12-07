@@ -248,7 +248,7 @@ function checkCollisionDemons() {
     ctx.fillStyle = "red";
     ctx.textAlign = "center";
     ctx.fillText(
-      `OH NO YOU'RE DAMNED! :p`,
+      `OH NO YOU'RE DAMNED! eheh :p`,
       canvas.width / 2,
       canvas.height / 2
     );
