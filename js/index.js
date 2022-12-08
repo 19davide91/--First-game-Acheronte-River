@@ -62,7 +62,6 @@ class Boat {
     this.y += 20;
   }
   moveLeft() {
-    if()
     this.x -= 20;
   }
   moveRight() {
