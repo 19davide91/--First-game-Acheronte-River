@@ -18,4 +18,4 @@ The game ends when the boat collide with a demon, for each soul collected the pl
 - add sounds
 # Link
 
-https://docs.google.com/presentation/d/13ACLj6wkYzeGJ2GhLrOOOsDZvDb4u8UoEIsQ_w6xN6k/edit?usp=sharing
+[Slide link](https://docs.google.com/presentation/d/13ACLj6wkYzeGJ2GhLrOOOsDZvDb4u8UoEIsQ_w6xN6k/edit?usp=sharing)
