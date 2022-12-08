@@ -1,4 +1,5 @@
 // Global variables
+
 let score = 0;
 let arrayDemons = [];
 let frames = 0;
@@ -7,16 +8,19 @@ let frames2 = 5;
 let animation = "";
 
 // canvas
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const backGroundImg = new Image();
 backGroundImg.src = "./img/redwater.jpg";
+
 function backgroundCanvas() {
   ctx.drawImage(backGroundImg, 0, 0, canvas.width, canvas.height);
 }
 
 // sounds
-let music = new sound("/music/Glory-Eternal.mp3");
+
+let music = new sound("./music/Glory-Eternal.mp3");
 let succesSound = new sound("./music/succes.mp3");
 let loseSound = new sound("./music/evil-laughing.mp3");
 
@@ -58,6 +62,7 @@ class Boat {
     this.y += 20;
   }
   moveLeft() {
+    if()
     this.x -= 20;
   }
   moveRight() {
@@ -143,22 +148,7 @@ class Soul {
   }
 }
 
-document.addEventListener("keydown", (event) => {
-  switch (event.keyCode) {
-    case 38:
-      boat1.moveUp();
-      break;
-    case 40:
-      boat1.moveDown();
-      break;
-    case 37:
-      boat1.moveLeft();
-      break;
-    case 39:
-      boat1.moveRight();
-      break;
-  }
-});
+// functions
 
 function updateDemons() {
   let i = 0;
@@ -222,13 +212,13 @@ function clearCanvas() {
   music.stop();
 }
 
-document.addEventListener("keydown", (event) => {
-  if (event.keyCode === 32) {
-    clearCanvas();
-  }
-});
+// document.addEventListener("keydown", (event) => {
+//   if (event.keyCode === 32) {
+//     clearCanvas();
+//   }
+// });
 
-function checkDemonHasCrashed(demon) {
+function crashedDemon(demon) {
   return !(
     boat1.top() > demon.bottom() - 20 ||
     boat1.right() < demon.left() + 20 ||
@@ -239,7 +229,7 @@ function checkDemonHasCrashed(demon) {
 
 function checkCollisionDemons() {
   const demonHasCrashed = arrayDemons.some(function (demon) {
-    return checkDemonHasCrashed(demon);
+    return crashedDemon(demon);
   });
   console.log("collisionDaemon: ", demonHasCrashed);
   if (demonHasCrashed) {
@@ -276,6 +266,17 @@ function checkCollisionSouls() {
   }
 }
 
+function boatInCanvas() {
+  if (boat1.left() < canvas.width) {
+  }
+  if (boat1.right() < canvas.width) {
+  }
+  if (boat1.top() < canvas.height) {
+  }
+  if (boat1.bottom() < canvas.height) {
+  }
+}
+
 function showScore() {
   ctx.font = "35px Comic Sans MS";
   ctx.fillStyle = "red";
@@ -293,3 +294,20 @@ window.onload = () => {
     clearCanvas();
   };
 };
+
+document.addEventListener("keydown", (event) => {
+  switch (event.keyCode) {
+    case 38:
+      boat1.moveUp();
+      break;
+    case 40:
+      boat1.moveDown();
+      break;
+    case 37:
+      boat1.moveLeft();
+      break;
+    case 39:
+      boat1.moveRight();
+      break;
+  }
+});
