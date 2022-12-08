@@ -28,7 +28,8 @@ function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
   document.body.appendChild(this.sound);
-  this.play = function () {
+  this.play = function (volume = 1) {
+    this.sound.volume = volume;
     this.sound.play();
   };
   this.stop = function () {
@@ -37,6 +38,7 @@ function sound(src) {
 }
 
 //classes
+
 class Boat {
   constructor() {
     this.x = 10;
@@ -45,7 +47,6 @@ class Boat {
     this.height = 55;
     this.speedX = 0;
     this.speedY = 0;
-
     const boatImg = new Image();
     boatImg.src = "./img/boat.jpg";
     boatImg.addEventListener("load", () => {
@@ -56,16 +57,24 @@ class Boat {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
   moveUp() {
-    this.y -= 20;
+    if (this.y > 0) {
+      this.y -= 20;
+    }
   }
   moveDown() {
-    this.y += 20;
+    if (this.y + 5 + this.height < canvas.height) {
+      this.y += 20;
+    }
   }
   moveLeft() {
-    this.x -= 20;
+    if (this.x > 0) {
+      this.x -= 20;
+    }
   }
   moveRight() {
-    this.x += 20;
+    if (this.x + this.width < canvas.width) {
+      this.x += 20;
+    }
   }
   left() {
     return this.x;
@@ -152,9 +161,12 @@ class Soul {
 function updateDemons() {
   let i = 0;
 
-  while (arrayDemons.length !== 0 && i < arrayDemons.length) {
-    arrayDemons[i].x -= 1;
-    arrayDemons[i].draw();
+  while (i < arrayDemons.length) {
+    if (arrayDemons.length !== 0) {
+      console.log(arrayDemons.length, arrayDemons[i]);
+      arrayDemons[i].x -= 1;
+      arrayDemons[i].draw();
+    }
     i++;
   }
   frames += 0.5;
@@ -170,9 +182,11 @@ function updateDemons() {
 function updateSouls() {
   let i = 0;
 
-  while (arraySouls.length !== 0 && i < arraySouls.length) {
-    arraySouls[i].x -= 0.5;
-    arraySouls[i].draw();
+  while (i < arraySouls.length) {
+    if (arraySouls.length !== 0) {
+      arraySouls[i].x -= 0.5;
+      arraySouls[i].draw();
+    }
     i++;
   }
   frames2 += 0.5;
@@ -199,7 +213,7 @@ function updateCanvas() {
 function gameStart() {
   backgroundCanvas();
   boat1.draw();
-  music.play();
+  music.play(0.5);
 }
 
 function clearCanvas() {
@@ -210,12 +224,6 @@ function clearCanvas() {
   arrayDemons = [];
   music.stop();
 }
-
-// document.addEventListener("keydown", (event) => {
-//   if (event.keyCode === 32) {
-//     clearCanvas();
-//   }
-// });
 
 function crashedDemon(demon) {
   return !(
@@ -286,6 +294,9 @@ function showScore() {
 window.onload = () => {
   backgroundCanvas();
   document.getElementById("button-one").onclick = () => {
+    document.getElementById("instructions").style.display = "none";
+    document.getElementById("game-board").style.display = "block";
+
     gameStart();
     animation = setInterval(updateCanvas, 8);
   };
@@ -308,5 +319,11 @@ document.addEventListener("keydown", (event) => {
     case 39:
       boat1.moveRight();
       break;
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.keyCode === 32) {
+    clearCanvas();
   }
 });

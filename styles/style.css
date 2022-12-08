@@ -37,7 +37,7 @@ body {
     font-stretch: ultra-expanded;
     font-weight: 600;
     -webkit-text-stroke: 2px black;
-    margin-top: 0px;
+    margin-top: 100px;
   }   
 
   #button-one:hover {
@@ -60,7 +60,7 @@ body {
     font-stretch: ultra-expanded;
     font-weight: 600;
     -webkit-text-stroke: 2px black;
-    margin-top: 10px;
+    margin-top: 100px;
   }   
 
   #button-two:hover {
@@ -74,11 +74,13 @@ body {
   }
 
   #instructions {
-    margin-top: 10px;
-    font-size: 25px;
+    margin-top: 200px;
+    font-size: 30px;
     color: black; 
+    -webkit-text-stroke: 1px darkred;
     font-style: italic;
     font-weight: bold;
+    vertical-align: center;
   }
 
   #dante {
@@ -113,5 +115,9 @@ body {
   }
   #underline{
     text-decoration: underline;
+  }
+
+  #game-board{
+    display: none;
   }
 }
