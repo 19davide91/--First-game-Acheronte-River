@@ -244,11 +244,7 @@ function checkCollisionDemons() {
     ctx.font = "40px Comic Sans MS";
     ctx.fillStyle = "red";
     ctx.textAlign = "center";
-    ctx.fillText(
-      `OH NO YOU'RE DAMNED! eheh :p`,
-      canvas.width / 2,
-      canvas.height / 2
-    );
+    ctx.fillText(`OH NO YOU'RE DAMNED!`, canvas.width / 2, canvas.height / 2);
     loseSound.play();
   }
 }
