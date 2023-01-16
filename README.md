@@ -16,6 +16,7 @@ The game ends when the boat collide with a demon, for each soul collected the pl
 
 - add points when a soul is collect
 - add sounds
-# Link
+# Links
 
 [Slide link](https://docs.google.com/presentation/d/13ACLj6wkYzeGJ2GhLrOOOsDZvDb4u8UoEIsQ_w6xN6k/edit?usp=sharing)
+[Slide link] (https://19davide91.github.io/--First-game-Acheronte-River/)
