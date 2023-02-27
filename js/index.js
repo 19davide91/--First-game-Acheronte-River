@@ -28,11 +28,11 @@ function sound(src) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
   document.body.appendChild(this.sound);
-  this.play = function (volume = 1) {
+  this.play = function(volume = 1) {
     this.sound.volume = volume;
     this.sound.play();
   };
-  this.stop = function () {
+  this.stop = function() {
     this.sound.pause();
   };
 }
@@ -235,7 +235,7 @@ function crashedDemon(demon) {
 }
 
 function checkCollisionDemons() {
-  const demonHasCrashed = arrayDemons.some(function (demon) {
+  const demonHasCrashed = arrayDemons.some(function(demon) {
     return crashedDemon(demon);
   });
   console.log("collisionDaemon: ", demonHasCrashed);
